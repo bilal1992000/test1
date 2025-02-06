@@ -1,182 +1,42 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تصفية المنتجات</title>
-    <style>
-        /* CSS لتنسيق الواجهة */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-        }
+# مشروع تصفية المنتجات
 
-        .product-filter {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+هذا مشروع بسيط لتصفية المنتجات حسب الفئة باستخدام HTML وCSS وJavaScript. يمكنك استخدامه لعرض قائمة من المنتجات وتصفيتها بناءً على الفئة المحددة.
 
-        .product-filter h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
+## معاينة المشروع
 
-        .filter-container {
-            position: relative;
-            display: inline-block;
-        }
+![معاينة المشروع](preview.png) <!-- إذا كان لديك صورة معاينة، يمكنك إضافتها هنا -->
 
-        .filter-container select {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            appearance: none; /* إزالة المظهر الافتراضي */
-            background-color: #f9f9f9;
-            cursor: pointer;
-            width: 200px;
-        }
+## كيفية الاستخدام
 
-        .filter-container::after {
-            content: "▼";
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: #666;
-        }
+1. **فتح الصفحة**: افتح ملف `index.html` في متصفحك.
+2. **اختيار الفئة**: اختر فئة المنتجات من القائمة المنسدلة.
+   - الخيارات المتاحة:
+     - جميع المنتجات
+     - الساعات الذكية
+     - الطابعات
+     - الجوالات
+     - أجهزة اللابتوب
+     - الكاميرات
+3. **التصفية**: انقر على زر "تصفية" لعرض المنتجات التي تنتمي إلى الفئة المحددة.
+4. **التحميل**: إذا كان المنتج يدعم التحميل (مثل "ساعة ذكية 1")، ستظهر زر "للتحميل" لفتح رابط التحميل.
 
-        .filter-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
+## التكنولوجيا المستخدمة
 
-        .filter-container button:hover {
-            background-color: #0056b3;
-        }
+- **HTML**: لإنشاء هيكل الصفحة.
+- **CSS**: لتنسيق الواجهة وتحسين المظهر.
+- **JavaScript**: لتنفيذ وظيفة التصفية وعرض النتائج ديناميكيًا.
 
-        .results {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fff;
-            max-width: 400px;
-            width: 100%;
-        }
+## هيكل الملفات
 
-        .product-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #eee;
-            border-radius: 4px;
-            background-color: #fafafa;
-            text-align: left;
-        }
+## التثبيت
 
-        .download-button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
+1. قم بتنزيل الملفات من المستودع.
+2. افتح ملف `index.html` في متصفحك.
 
-        .download-button:hover {
-            background-color: #218838;
-        }
-    </style>
-</head>
-<body>
-    <div class="product-filter">
-        <h2>تصفية المنتجات</h2>
-        <div class="filter-container">
-            <select id="filter" size="4"> <!-- حجم القائمة المنسدلة -->
-                <option value="all">جميع المنتجات</option>
-                <option value="smartwatches">الساعات الذكية</option>
-                <option value="printers">الطابعات</option>
-                <option value="mobiles">الجوالات</option>
-                <option value="laptops">أجهزة اللابتوب</option>
-                <option value="cameras">الكاميرات</option>
-            </select>
-            <button onclick="filterProducts()">تصفية</button>
-        </div>
+## الرخصة
 
-        <!-- مكان عرض النتائج -->
-        <div id="filter-results" class="results">
-            <!-- سيتم عرض المنتجات المصفاة هنا -->
-        </div>
-    </div>
+هذا المشروع مرخص تحت [رخصة MIT](LICENSE). يمكنك استخدامه وتعديله بحرية.
 
-    <script>
-        // بيانات المنتجات (يمكن استبدالها ببيانات من قاعدة بيانات)
-        const products = [
-            { name: "ساعة ذكية 1", category: "smartwatches" },
-            { name: "طابعة ليزر", category: "printers" },
-            { name: "جوال سامسونج", category: "mobiles" },
-            { name: "ساعة ذكية 2", category: "smartwatches" },
-            { name: "لابتوب ديل", category: "laptops" },
-            { name: "كاميرا كانون", category: "cameras" }
-        ];
+---
 
-        // دالة التصفية
-        function filterProducts() {
-            const selectedCategory = document.getElementById("filter").value;
-            const resultsContainer = document.getElementById("filter-results");
-
-            let filteredProducts = [];
-
-            if (selectedCategory === "all") {
-                filteredProducts = products; // عرض جميع المنتجات
-            } else {
-                filteredProducts = products.filter(product => product.category === selectedCategory); // تصفية حسب الفئة
-            }
-
-            // عرض المنتجات المصفاة
-            if (filteredProducts.length > 0) {
-                resultsContainer.innerHTML = filteredProducts.map(product => `
-                    <div class="product-item">
-                        <h3>${product.name}</h3>
-                        <p>الفئة: ${product.category}</p>
-                        ${product.name === "ساعة ذكية 1" ? `
-                            <button class="download-button" onclick="openGooglePlay()">للتحميل</button>
-                        ` : ""}
-                    </div>
-                `).join("");
-            } else {
-                resultsContainer.innerHTML = "<p>لا توجد منتجات في هذه الفئة.</p>";
-            }
-        }
-
-        // دالة لفتح رابط Google Play
-        function openGooglePlay() {
-            const link = "https://play.google.com/store/apps/details?id=com.oneplusnordwatch.appguide20242122";
-            window.open(link, "_blank"); // فتح الرابط في نافذة جديدة
-        }
-
-        // عرض جميع المنتجات عند تحميل الصفحة
-        filterProducts();
-    </script>
-</body>
-</html>
+**ملاحظة**: إذا كنت تستخدم GitHub Pages، تأكد من تفعيلها في إعدادات المستودع لرؤية الصفحة مباشرة على الويب.
